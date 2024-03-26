@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.model.Company;
 import org.example.service.CompanySvc;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import java.util.List;
 @Tag(name = "Company", description = "Company endpoints")
 public class CompanyController {
 
-    @Autowired
     private CompanySvc companySvc;
 
     @Operation(summary = "Get all companies", description = "Get all companies from database")

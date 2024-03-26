@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CompanyControllerTest {
+class CompanyControllerTest {
 
     @Mock
     private CompanySvc companySvc;
@@ -28,7 +28,7 @@ public class CompanyControllerTest {
     private CompanyController companyController;
 
     @Test
-    public void testFindAllCompanies() {
+    void testFindAllCompanies() {
         List<Company> companyList = new ArrayList<>();
         companyList.add(new Company(1L, "Company A", "Test A", 1L));
         companyList.add(new Company(2L, "Company B", "Test B", 2L));
@@ -41,7 +41,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testFindCompanyById() {
+    void testFindCompanyById() {
         Long companyId = 1L;
         Company company = new Company(1L, "Company A", "Test A", 1L);
         when(companySvc.findCompanyById(companyId)).thenReturn(company);
@@ -53,7 +53,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testFindCompanyByIdNotFound() {
+    void testFindCompanyByIdNotFound() {
         Long companyId = 1L;
         when(companySvc.findCompanyById(companyId)).thenReturn(null);
 
@@ -63,7 +63,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testSaveCompany() {
+    void testSaveCompany() {
         Company company = new Company(1L, "Company A", "Test A", 1L);
         doNothing().when(companySvc).saveCompany(company);
 
@@ -74,7 +74,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testUpdateCompany() {
+    void testUpdateCompany() {
         Long companyId = 1L;
         Company company = new Company();
         doNothing().when(companySvc).updateCompany(company);
@@ -86,7 +86,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testDeleteCompany() {
+    void testDeleteCompany() {
         Long companyId = 1L;
         doNothing().when(companySvc).deleteCompany(companyId);
 

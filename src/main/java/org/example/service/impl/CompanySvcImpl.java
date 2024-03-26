@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.example.model.Company;
 import org.example.repo.CompanyRepo;
 import org.example.service.CompanySvc;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 @Transactional
 public class CompanySvcImpl implements CompanySvc {
 
-    @Autowired
     private CompanyRepo companyRepo;
     @Override
     public List<Company> findAllCompanies() {
