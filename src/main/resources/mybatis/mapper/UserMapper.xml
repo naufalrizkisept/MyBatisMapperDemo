@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.repo.UserRepo">
+    <resultMap id="userResultMap" type="User">
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userJob" column="user_job"/>
+        <result property="companyId" column="company_id"/>
+    </resultMap>
+
+    <select id="findAllUsers" resultMap="userResultMap">
+        SELECT * FROM USER_TABLE
+    </select>
+
+    <select id="findUserById" parameterType="Long" resultMap="userResultMap">
+        SELECT * FROM USER_TABLE WHERE user_id = #{userId}
+    </select>
+
+    <insert id="saveUser" parameterType="User">
+        INSERT INTO USER_TABLE VALUES (#{userId}, #{userName}, #{userEmail}, #{userJob}, #{companyId})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE USER_TABLE SET
+        user_name = #{userName},
+        user_email = #{userEmail},
+        user_job = #{userJob}
+        company_id = #{companyId}
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id="deleteUser" parameterType="Long">
+        DELETE FROM USER_TABLE WHERE user_id = #{userId}
+    </delete>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.repo.IndustryRepo">
+    <resultMap id="industryResultMap" type="Industry">
+        <result property="industryId" column="industry_id"/>
+        <result property="industryName" column="industry_name"/>
+        <result property="industryDesc" column="industry_desc"/>
+    </resultMap>
+
+    <select id="findAllIndustries" resultMap="industryResultMap">
+        SELECT * FROM INDUSTRY_TABLE
+    </select>
+
+    <select id="findIndustryById" parameterType="Long" resultMap="industryResultMap">
+        SELECT * FROM INDUSTRY_TABLE WHERE industry_id = #{industryId}
+    </select>
+
+    <insert id="saveIndustry" parameterType="Industry">
+        INSERT INTO INDUSTRY_TABLE VALUES (#{industryId}, #{industryName}, #{industryDesc})
+    </insert>
+
+    <update id="updateIndustry" parameterType="Industry">
+        UPDATE INDUSTRY_TABLE SET
+        industry_name = #{industryName},
+        industry_desc = #{industryDesc}
+        WHERE industry_id = #{industryId}
+    </update>
+
+    <delete id="deleteIndustry" parameterType="Long">
+        DELETE FROM INDUSTRY_TABLE WHERE industry_id = #{industryId}
+    </delete>
+</mapper>

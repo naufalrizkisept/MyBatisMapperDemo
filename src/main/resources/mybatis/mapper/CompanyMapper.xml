@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.repo.CompanyRepo">
+    <resultMap id="companyResultMap" type="Company">
+        <result property="companyId" column="company_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="industryId" column="industry_id"/>
+    </resultMap>
+
+    <select id="findAllCompanies" resultMap="companyResultMap">
+        SELECT * FROM COMPANY_TABLE
+    </select>
+
+    <select id="findCompanyById" parameterType="Long" resultMap="companyResultMap">
+        SELECT * FROM COMPANY_TABLE WHERE company_id = #{companyId}
+    </select>
+
+    <insert id="saveCompany" parameterType="Company">
+        INSERT INTO COMPANY_TABLE VALUES (#{companyId}, #{companyName}, #{companyAddress}, #{industryId})
+    </insert>
+
+    <update id="updateCompany" parameterType="Company">
+        UPDATE COMPANY_TABLE SET
+            company_name = #{companyName},
+            company_address = #{companyAddress},
+            industry_id = #{industryId}
+        WHERE company_id = #{companyId}
+    </update>
+
+    <delete id="deleteCompany" parameterType="Long">
+        DELETE FROM COMPANY_TABLE WHERE company_id = #{companyId}
+    </delete>
+</mapper>
