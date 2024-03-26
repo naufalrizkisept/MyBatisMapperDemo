@@ -1,12 +1,10 @@
 package org.example;
 
-
-import org.example.controller.CompanyControllerTest;
+import org.example.controller.CompanyController;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static junit.framework.Assert.assertNull;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class MainTest {
@@ -14,7 +12,7 @@ class MainTest {
     @Test
     void applicationStarts() {
         Main.main(new String[] {});
-        CompanyControllerTest companyControllerTest = new CompanyControllerTest();
-        companyControllerTest.testFindAllCompanies();
+        CompanyController companyControllerTest = new CompanyController();
+        assertNull(companyControllerTest.deleteCompany(1L));
     }
 }
