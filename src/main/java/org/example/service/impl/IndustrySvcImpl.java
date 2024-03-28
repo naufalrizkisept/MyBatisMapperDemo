@@ -30,25 +30,25 @@ public class IndustrySvcImpl implements IndustrySvc {
 
     @Override
     @Cacheable(value = "industryCache", key = "'industry_' + #id")
-    public Industry findIndustryById(@PathVariable("id") Long id) {
+    public Industry findIndustryById(Long id) {
         return industryRepo.findIndustryById(id);
     }
 
     @Override
     @CachePut(value = "saveIndustryCache", key = "#industry.industryId")
-    public void saveIndustry(@RequestBody Industry industry) {
+    public void saveIndustry(Industry industry) {
         industryRepo.saveIndustry(industry);
     }
 
     @Override
-    @Caching(evict = @CacheEvict(value = "industryCache", key = "'industry_' + #industry.industryId", beforeInvocation = true), put = @CachePut(value = "updateIndustryCache", key = "'industry_' + #industry.industryId"))
-    public void updateIndustry(@RequestBody Industry industry) {
+    @CachePut(value = "updateIndustryCache", key = "#industry.industryId")
+    public void updateIndustry(Industry industry) {
         industryRepo.updateIndustry(industry);
     }
 
     @Override
     @CacheEvict(value = "deleteIndustryCache", key = "'industry_' + #id")
-    public void deleteIndustry(@PathVariable("id") Long id) {
+    public void deleteIndustry(Long id) {
         industryRepo.deleteIndustry(id);
     }
 }

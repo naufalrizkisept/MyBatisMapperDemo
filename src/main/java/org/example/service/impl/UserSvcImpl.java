@@ -30,19 +30,19 @@ public class UserSvcImpl implements UserSvc {
 
     @Override
     @Cacheable(value = "userCache", key = "'user_' + #id")
-    public User findUserById(@PathVariable("id") Long id) {
+    public User findUserById(Long id) {
         return userRepo.findUserById(id);
     }
 
     @Override
-    @CachePut(value = "saveUserCache", key = "#user.userId")
-    public void saveUser(@RequestBody User user) {
+    @CachePut(value = "saveUserCache")
+    public void saveUser(User user) {
         userRepo.saveUser(user);
     }
 
     @Override
-    @Caching(evict = @CacheEvict(value = "userCache", key = "'user_' + #user.userId", beforeInvocation = true), put = @CachePut(value = "updateUserCache", key = "'user_' + #user.userId"))
-    public void updateUser(@RequestBody User user) {
+    @CachePut(value = "updateUserCache", key = "'user_' + #user.userId")
+    public void updateUser(User user) {
         userRepo.updateUser(user);
     }
 

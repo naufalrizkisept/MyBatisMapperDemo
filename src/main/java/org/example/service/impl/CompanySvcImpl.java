@@ -29,25 +29,25 @@ public class CompanySvcImpl implements CompanySvc {
 
     @Override
     @Cacheable(value = "companyCache", key = "'company_' + #id")
-    public Company findCompanyById(@PathVariable("id") Long id) {
+    public Company findCompanyById(Long id) {
         return companyRepo.findCompanyById(id);
     }
 
     @Override
     @CachePut(value = "saveCompanyCache", key = "#company.companyId")
-    public void saveCompany(@RequestBody Company company) {
+    public void saveCompany(Company company) {
         companyRepo.saveCompany(company);
     }
 
     @Override
-    @Caching(evict = @CacheEvict(value = "companyCache", key = "'company_' + #company.companyId", beforeInvocation = true), put = @CachePut(value = "updateCompanyCache", key = "'company_' + #company.companyId"))
-    public void updateCompany(@RequestBody Company company) {
+    @CachePut(value = "updateCompanyCache", key = "#company.companyId")
+    public void updateCompany(Company company) {
         companyRepo.updateCompany(company);
     }
 
     @Override
     @CacheEvict(value = "deleteCompanyCache", key = "'company_' + #id", beforeInvocation = true)
-    public void deleteCompany(@PathVariable("id") Long id) {
+    public void deleteCompany(Long id) {
         companyRepo.deleteCompany(id);
     }
 }
