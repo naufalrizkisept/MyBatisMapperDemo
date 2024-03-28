@@ -25,7 +25,7 @@
         UPDATE USER_TABLE SET
         user_name = #{userName},
         user_email = #{userEmail},
-        user_job = #{userJob}
+        user_job = #{userJob},
         company_id = #{companyId}
         WHERE user_id = #{userId}
     </update>

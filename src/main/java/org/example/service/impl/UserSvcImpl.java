@@ -29,7 +29,7 @@ public class UserSvcImpl implements UserSvc {
     }
 
     @Override
-    @Cacheable(value = "userCache", key = "'user_' + #id")
+    @Cacheable(value = "userCache")
     public User findUserById(Long id) {
         return userRepo.findUserById(id);
     }
@@ -41,13 +41,13 @@ public class UserSvcImpl implements UserSvc {
     }
 
     @Override
-    @CachePut(value = "updateUserCache", key = "'user_' + #user.userId")
+    @CachePut(value = "updateUserCache")
     public void updateUser(User user) {
         userRepo.updateUser(user);
     }
 
     @Override
-    @CacheEvict(value = "deleteUserCache", key = "'user_'" + "#id")
+    @CacheEvict(value = "deleteUserCache")
     public void deleteUser(Long id) {
         userRepo.deleteUser(id);
     }

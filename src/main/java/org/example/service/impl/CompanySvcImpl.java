@@ -28,25 +28,25 @@ public class CompanySvcImpl implements CompanySvc {
     }
 
     @Override
-    @Cacheable(value = "companyCache", key = "'company_' + #id")
+    @Cacheable(value = "companyCache")
     public Company findCompanyById(Long id) {
         return companyRepo.findCompanyById(id);
     }
 
     @Override
-    @CachePut(value = "saveCompanyCache", key = "#company.companyId")
+    @CachePut(value = "saveCompanyCache")
     public void saveCompany(Company company) {
         companyRepo.saveCompany(company);
     }
 
     @Override
-    @CachePut(value = "updateCompanyCache", key = "#company.companyId")
+    @CachePut(value = "updateCompanyCache")
     public void updateCompany(Company company) {
         companyRepo.updateCompany(company);
     }
 
     @Override
-    @CacheEvict(value = "deleteCompanyCache", key = "'company_' + #id", beforeInvocation = true)
+    @CacheEvict(value = "deleteCompanyCache", beforeInvocation = true)
     public void deleteCompany(Long id) {
         companyRepo.deleteCompany(id);
     }
