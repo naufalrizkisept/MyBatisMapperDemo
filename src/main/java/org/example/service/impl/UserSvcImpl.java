@@ -23,31 +23,31 @@ public class UserSvcImpl implements UserSvc {
     private UserRepo userRepo;
 
     @Override
-    @Cacheable(value = "listUserCache")
+    @Cacheable(value = "listUserCache", cacheManager = "cacheManager")
     public List<User> findAllUsers() {
         return userRepo.findAllUsers();
     }
 
     @Override
-    @Cacheable(value = "userCache")
+    @Cacheable(value = "userCache", cacheManager = "cacheManager")
     public User findUserById(Long id) {
         return userRepo.findUserById(id);
     }
 
     @Override
-    @CachePut(value = "saveUserCache")
+    @CachePut(value = "saveUserCache", cacheManager = "cacheManager")
     public void saveUser(User user) {
         userRepo.saveUser(user);
     }
 
     @Override
-    @CachePut(value = "updateUserCache")
+    @CachePut(value = "updateUserCache", cacheManager = "cacheManager")
     public void updateUser(User user) {
         userRepo.updateUser(user);
     }
 
     @Override
-    @CacheEvict(value = "deleteUserCache")
+    @CacheEvict(value = "deleteUserCache", beforeInvocation = true, cacheManager = "cacheManager")
     public void deleteUser(Long id) {
         userRepo.deleteUser(id);
     }

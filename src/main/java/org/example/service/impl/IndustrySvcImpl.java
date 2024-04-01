@@ -23,31 +23,31 @@ public class IndustrySvcImpl implements IndustrySvc {
     private IndustryRepo industryRepo;
 
     @Override
-    @Cacheable(value = "listIndustryCache")
+    @Cacheable(value = "listIndustryCache", cacheManager = "cacheManager")
     public List<Industry> findAllIndustries() {
         return industryRepo.findAllIndustries();
     }
 
     @Override
-    @Cacheable(value = "industryCache")
+    @Cacheable(value = "industryCache", cacheManager = "cacheManager")
     public Industry findIndustryById(Long id) {
         return industryRepo.findIndustryById(id);
     }
 
     @Override
-    @CachePut(value = "saveIndustryCache")
+    @CachePut(value = "saveIndustryCache", cacheManager = "cacheManager")
     public void saveIndustry(Industry industry) {
         industryRepo.saveIndustry(industry);
     }
 
     @Override
-    @CachePut(value = "updateIndustryCache")
+    @CachePut(value = "updateIndustryCache", cacheManager = "cacheManager")
     public void updateIndustry(Industry industry) {
         industryRepo.updateIndustry(industry);
     }
 
     @Override
-    @CacheEvict(value = "deleteIndustryCache")
+    @CacheEvict(value = "deleteIndustryCache", beforeInvocation = true, cacheManager = "cacheManager")
     public void deleteIndustry(Long id) {
         industryRepo.deleteIndustry(id);
     }

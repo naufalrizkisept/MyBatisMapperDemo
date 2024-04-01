@@ -22,31 +22,31 @@ public class CompanySvcImpl implements CompanySvc {
     @Autowired
     private CompanyRepo companyRepo;
     @Override
-    @Cacheable(value = "listCompanyCache")
+    @Cacheable(value = "listCompanyCache", cacheManager = "cacheManager")
     public List<Company> findAllCompanies() {
         return companyRepo.findAllCompanies();
     }
 
     @Override
-    @Cacheable(value = "companyCache")
+    @Cacheable(value = "companyCache", cacheManager = "cacheManager")
     public Company findCompanyById(Long id) {
         return companyRepo.findCompanyById(id);
     }
 
     @Override
-    @CachePut(value = "saveCompanyCache")
+    @CachePut(value = "saveCompanyCache", cacheManager = "cacheManager")
     public void saveCompany(Company company) {
         companyRepo.saveCompany(company);
     }
 
     @Override
-    @CachePut(value = "updateCompanyCache")
+    @CachePut(value = "updateCompanyCache", cacheManager = "cacheManager")
     public void updateCompany(Company company) {
         companyRepo.updateCompany(company);
     }
 
     @Override
-    @CacheEvict(value = "deleteCompanyCache", beforeInvocation = true)
+    @CacheEvict(value = "deleteCompanyCache", beforeInvocation = true, cacheManager = "cacheManager")
     public void deleteCompany(Long id) {
         companyRepo.deleteCompany(id);
     }
